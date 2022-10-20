@@ -819,3 +819,8 @@ button {
   font-size: 0.8rem;
   opacity: 0.75;
 }
+
+.loading {
+  margin-top: 40%;
+  margin-left: 40%;
+}
