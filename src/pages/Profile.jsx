@@ -1,17 +1,32 @@
 import { useState, useEffect } from 'react';
 import { getAuth } from 'firebase/auth';
+import { useNavigate, Link } from 'react-router-dom';
 
 function Profile() {
-  const [user, setUser] = useState(null);
   const auth = getAuth();
-  useEffect(() => {
-    setUser(auth.currentUser);
-  }, []);
+  const [formData, setformData] = useState({
+    name: auth.currentUser.displayName,
+    email: auth.currentUser.email,
+  });
 
-  return user ? (
-    <h1>{user.displayName}</h1>
-  ) : (
-    'Ви не увійшли в особистий кабінет'
+  const { name, email } = formData;
+
+  const navigate = useNavigate();
+
+  const onLogout = () => {
+    auth.signOut();
+    navigate('/');
+  };
+
+  return (
+    <div className="profile">
+      <header className="profileHeader">
+        <p className="pageHeader">Мій профіль</p>
+        <button type="button" onClick={onLogout} className="logOut">
+          Вийти
+        </button>
+      </header>
+    </div>
   );
 }
 
