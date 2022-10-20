@@ -9,7 +9,7 @@ import {
 } from 'firebase/auth';
 import { setDoc, doc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../firebase.config';
-import { ReactComponent as ArrowRightIcon } from '../assets/svg/keyboardArrowRightIcon.svg';
+import { ReactComponent as ArrowRightIcon } from '../assets/svg/arrow.svg';
 import visibility from '../assets/svg/visibility.svg';
 
 function SignUp() {
