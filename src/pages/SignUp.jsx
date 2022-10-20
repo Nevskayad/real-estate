@@ -6,6 +6,7 @@ import {
   UpdateProfile,
   updateProfile,
 } from 'firebase/auth';
+import { setDoc, doc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../firebase.config';
 import { ReactComponent as ArrowRightIcon } from '../assets/svg/keyboardArrowRightIcon.svg';
 import visibility from '../assets/svg/visibility.svg';
@@ -41,12 +42,21 @@ function SignUp() {
       );
 
       const user = userCredential.user;
+
       updateProfile(auth.currentUser, {
         displayName: name,
       });
 
+      const formDataCopy = { ...formData };
+      delete formDataCopy.password;
+      formDataCopy.timestamp = serverTimestamp();
+
+      await setDoc(doc(db, 'users', user.uid), formDataCopy);
+
       navigate('/');
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
