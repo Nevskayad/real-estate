@@ -13,7 +13,12 @@ function SignIn() {
 
   const navigate = useNavigate();
 
-  const onChange = () => {};
+  const onChange = (e) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      [e.target.id]: e.target.value,
+    }));
+  };
 
   return (
     <>
@@ -28,6 +33,7 @@ function SignIn() {
               type="email"
               className="emailInput"
               placeholder="Email"
+              id="email"
               value={email}
               onChange={onChange}
             />
@@ -61,6 +67,9 @@ function SignIn() {
               </button>
             </div>
           </form>
+          <Link to="/sign-up" className="registerLink">
+            Зареєструватися
+          </Link>
         </main>
       </div>
     </>
