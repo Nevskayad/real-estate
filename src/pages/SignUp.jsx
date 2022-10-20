@@ -9,6 +9,7 @@ import {
 } from 'firebase/auth';
 import { setDoc, doc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../firebase.config';
+import OAuth from '../components/OAuth';
 import { ReactComponent as ArrowRightIcon } from '../assets/svg/arrow.svg';
 import visibility from '../assets/svg/visibility.svg';
 
@@ -111,6 +112,9 @@ function SignUp() {
               </button>
             </div>
           </form>
+
+          <OAuth />
+
           <Link to="/sign-in" className="registerLink">
             Увійти
           </Link>
