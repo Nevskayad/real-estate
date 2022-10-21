@@ -26,7 +26,7 @@ function ListingItem({ listing, id, onDelete }) {
               : listing.regularPrice
                   .toString()
                   .replace(/\B(?=(\d{3})+(?!\d))/g, ' ')}
-            ₴{listing.type === 'rent' && ' / В місяць'}
+            ₴{listing.type === 'rent' && ' / місяць'}
           </p>
           <div className="categoryListingInfoDiv">
             <img src={bedIcon} alt="спальна кімната" />

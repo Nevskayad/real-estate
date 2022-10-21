@@ -58,7 +58,7 @@ function Offers() {
   return (
     <div className="category">
       <header>
-        <p className="pageHeader">Пропозиції</p>
+        <p className="pageHeader">Вигідна ціна</p>
       </header>
 
       {loading ? (

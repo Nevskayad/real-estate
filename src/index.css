@@ -23,6 +23,7 @@ a {
 button {
   outline: none;
   border: none;
+  cursor: pointer;
 }
 
 .input,
@@ -59,13 +60,13 @@ button {
 
 .primaryButton {
   cursor: pointer;
-  background: #00cc66;
+  background: #f08080;
   border-radius: 1rem;
   padding: 0.85rem 2rem;
   color: #ffffff;
   font-weight: 600;
   font-size: 1.25rem;
-  width: 80%;
+  width: 50%;
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -150,6 +151,7 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
+  border-top: 1px solid #f08080;
 }
 
 .navbarNav {
@@ -713,6 +715,12 @@ button {
 
 .formButtons {
   display: flex;
+}
+
+.formRooms {
+  display: flex;
+  width: 320px;
+  justify-content: space-between;
 }
 
 .formButton,
