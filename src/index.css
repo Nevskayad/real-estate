@@ -377,7 +377,7 @@ button {
   min-height: 115px;
   height: 15vw;
   width: 100%;
-  border-radius: 1.5rem;
+  border-radius: 0.5rem;
   object-fit: cover;
   margin: 0 auto;
 }
