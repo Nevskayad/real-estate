@@ -76,6 +76,8 @@ function CreateListing() {
   const onSubmit = async (e) => {
     e.preventDefault();
 
+    setLoading(true);
+
     if (discountedPrice >= regularPrice) {
       setLoading(false);
       toast.error('Ціна зі знижкою має буте меншою за звичайну ціну');
