@@ -6,6 +6,7 @@ import {
   uploadBytesResumable,
   getDownloadURL,
 } from 'firebase/storage';
+import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
 import { db } from '../firebase.config';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -89,7 +90,7 @@ function CreateListing() {
 
     let geolocation = {};
     let location;
-    // AIzaSyCkqoN9VfkVspOgWvHjuRtnL63xvd4BBWk
+
     if (geolocationEnabled) {
       const response = await fetch(
         `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${process.env.REACT_APP_REAL_ESTATE_GEOCODE_API_KEY}`
@@ -158,7 +159,7 @@ function CreateListing() {
       });
     };
 
-    const imgUrls = await Promise.all(
+    const imageUrls = await Promise.all(
       [...images].map((image) => storeImage(image))
     ).catch(() => {
       setLoading(false);
@@ -166,9 +167,22 @@ function CreateListing() {
       return;
     });
 
-    console.log(imgUrls);
+    const formDataCopy = {
+      ...formData,
+      imageUrls,
+      geolocation,
+      timestamp: serverTimestamp(),
+    };
 
+    delete formData.images;
+    delete formData.address;
+    location && (formDataCopy.location = location);
+    !formDataCopy.offer && delete formDataCopy.discountedPrice;
+
+    const docRef = await addDoc(collection(db, 'listings'), formDataCopy);
     setLoading(false);
+    toast.success('Оголошення збережено');
+    navigate(`/category/${formDataCopy.type}/${docRef.id}`);
   };
 
   const onMutate = (e) => {
