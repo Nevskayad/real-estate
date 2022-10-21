@@ -176,10 +176,11 @@ function CreateListing() {
     };
 
     formDataCopy.location = address;
-    delete formData.images;
-    delete formData.address;
+    delete formDataCopy.images;
+    delete formDataCopy.address;
     !formDataCopy.offer && delete formDataCopy.discountedPrice;
 
+    console.log(formDataCopy);
     const docRef = await addDoc(collection(db, 'listings'), formDataCopy);
     setLoading(false);
     toast.success('Оголошення збережено');
@@ -440,7 +441,7 @@ function CreateListing() {
               id="totalArea"
               value={totalArea}
               onChange={onMutate}
-              min="50"
+              min="5"
               max="5000"
               required
             />
