@@ -824,6 +824,7 @@ button {
 }
 
 .loading {
+  color: #f08080;
   margin-top: 40%;
   margin-left: 40%;
 }
