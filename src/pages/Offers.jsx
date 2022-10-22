@@ -16,6 +16,7 @@ import ListingItem from '../components/ListingItem';
 function Offers() {
   const [listings, setListings] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [lastFetchedListing, setLastFetchedListing] = useState(null);
 
   const params = useParams();
 
@@ -36,6 +37,9 @@ function Offers() {
         //Виконати запит
         const querySnap = await getDocs(q);
 
+        const lastVisible = querySnap.docs[querySnap.docs.length - 1];
+        setLastFetchedListing(lastVisible);
+
         const listings = [];
 
         querySnap.forEach((doc) => {
@@ -54,6 +58,43 @@ function Offers() {
 
     fetchListings();
   }, []);
+
+  //Пагінація - загрузити більше
+  const onFetchMoreListings = async () => {
+    try {
+      //Отримати посилання
+      const listingsRef = collection(db, 'listings');
+
+      //Створити запит
+      const q = query(
+        listingsRef,
+        where('offer', '==', true),
+        orderBy('timestamp', 'desc'),
+        startAfter(lastFetchedListing),
+        limit(10)
+      );
+
+      //Виконати запит
+      const querySnap = await getDocs(q);
+
+      const lastVisible = querySnap.docs[querySnap.docs.length - 1];
+      setLastFetchedListing(lastVisible);
+
+      const listings = [];
+
+      querySnap.forEach((doc) => {
+        return listings.push({
+          id: doc.id,
+          data: doc.data(),
+        });
+      });
+
+      setListings((prevState) => [...prevState, ...listings]);
+      setLoading(false);
+    } catch (error) {
+      toast.error('Виникла помилка. Будь ласка, спробуйте ще раз');
+    }
+  };
 
   return (
     <div className="category">
@@ -76,6 +117,14 @@ function Offers() {
               ))}
             </ul>
           </main>
+
+          <br />
+          <br />
+          {lastFetchedListing && (
+            <p className="loadMore" onClick={onFetchMoreListings}>
+              Більше
+            </p>
+          )}
         </>
       ) : (
         <p>Нажаль, немає актуальних пропозицій</p>
