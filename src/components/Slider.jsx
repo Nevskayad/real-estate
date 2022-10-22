@@ -36,6 +36,10 @@ function Slider() {
   if (loading) {
     return <h3 className="loading">Загрузка...</h3>;
   }
+
+  if (listings.length === 0) {
+    return <></>;
+  }
   return (
     listings && (
       <>
