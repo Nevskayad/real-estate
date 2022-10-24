@@ -539,6 +539,17 @@ ul {
   margin-right: 1rem;
 }
 
+.listingType2 {
+  padding: 0.25rem 0.5rem;
+  background-color: #f8ad9d;
+  color: #ffffff;
+  border-radius: 2rem;
+  display: inline;
+  font-weight: 600;
+  font-size: 0.8rem;
+  margin-right: 1rem;
+}
+
 .listingDetailsList {
   padding: 0;
   list-style-type: none;

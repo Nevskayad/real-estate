@@ -40,7 +40,9 @@ function ForgotPassword() {
           </Link>
 
           <div className="signInBar">
-            <div className="signInText">Надіслати лист для збросу пароля</div>
+            <div className="signInText">
+              Надіслати лист для відновлення пароля
+            </div>
             <button className="signInButton">
               <ArrowRightIcon width="34px" height="34px" fill="#ffdab9" />
             </button>

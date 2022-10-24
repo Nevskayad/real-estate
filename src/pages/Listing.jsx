@@ -89,6 +89,9 @@ function Listing() {
         <p className="listingType">
           {listing.type === 'rent' ? 'Оренда' : 'Продаж'}
         </p>
+        <p className="listingType listingType2">
+          {listing.furnished && 'З меблями'}
+        </p>
         {listing.offer && (
           <p className="discountPrice">
             {listing.regularPrice - listing.discountedPrice}₴ знижка
@@ -98,6 +101,7 @@ function Listing() {
         <ul className="listingDetailsList">
           <li>{`Спальні кімнати: ${listing.bedrooms}`}</li>
           <li>{`Ванні кімнати: ${listing.bathrooms}`}</li>
+          <li>{`Загальна площа: ${listing.totalArea}м2`}</li>
           <li>{listing.parking && 'Є місце для парковки'}</li>
           <li>{listing.furnished && 'З меблями'}</li>
         </ul>
