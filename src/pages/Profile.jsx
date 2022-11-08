@@ -92,7 +92,7 @@ function Profile() {
 
   const onDelete = async (listingId) => {
     if (window.confirm('Ви впевнені, що хочете видалити оголошення?')) {
-      await deleteDoc(doc(db, 'listins', listingId));
+      await deleteDoc(doc(db, 'listings', listingId));
       const updatedListings = listings.filter(
         (listing) => listing.id !== listingId
       );
@@ -153,7 +153,7 @@ function Profile() {
           <img src={arrowRight} alt="праворуч" />
         </Link>
 
-        {!loading && listings.length > 0 && (
+        {!loading && listings?.length > 0 && (
           <>
             <p className="listingText">Мої оголошення</p>
             <ul className="listingsList">
